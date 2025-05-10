@@ -1,27 +1,44 @@
+require('dotenv').config(); 
 const express = require('express');
-const app = express ();
+const mysql = require('mysql2');
+const app = express();
 const port = 3000;
 
 app.use(express.json());
 
-//Principal ruta
+
+const db = mysql.createConnection({
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME
+});
+
+db.connect((err) => {
+  if (err) {
+    console.error('Error de conexión:', err);
+    return;
+  }
+  console.log('✅ Conectado a MySQL correctamente');
+});
+
+// ruta
 app.get('/', (req, res) => {
-    res.send('Ferreteria Ferremas');
+  res.send('Ferretería FERREMAS');
 });
 
-//Rutas para productos
-
+// nueva ruta
 app.get('/api/productos', (req, res) => {
-    res.json([
-        { id: 1, nombre: 'Martillo', precio:
-4990 },
-        { id: 2, nombre: 'Taladro inhalambrico', precio:
-36990}
-    ]);
+  db.query('SELECT * FROM productos', (err, results) => {
+    if (err) {
+      console.error('Error al obtener productos:', err);
+      return res.status(500).json({ error: 'Error en la base de datos' });
+    }
+    res.json(results);
+  });
 });
 
-//inicio servidor
-app.listen (port, ()=> {
-    console.log(`Servidor escuchando en 
-   https://localhost:${port}`);
+
+app.listen(port, () => {
+  console.log(`Servidor escuchando en http://localhost:${port}`);
 });
