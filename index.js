@@ -4,6 +4,7 @@ const app = express();
 const port = 3000;
 const pagosRoutes = require('./routes/pagos.routes');
 const conversionRoutes = require('./routes/conversion.routes');
+const soapRoutes = require('./routes/soap.routes');
 
 // Middlewares
 app.use(express.json());
@@ -23,6 +24,8 @@ app.use('/api/pagos', pagosRoutes);
 
 
 app.use('/api/productos', conversionRoutes);
+
+app.use('/api/soap', soapRoutes);
 
 // Iniciar servidor
 app.listen(port, () => {
