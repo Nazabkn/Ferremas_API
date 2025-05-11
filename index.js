@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const port = 3000;
+const pagosRoutes = require('./routes/pagos.routes');
 
 // Middlewares
 app.use(express.json());
@@ -16,6 +17,10 @@ app.use('/api/productos', productosRoutes);
 app.get('/', (req, res) => {
   res.send('Ferretería FERREMAS');
 });
+
+
+app.use('/api/pagos', pagosRoutes);
+
 
 // Iniciar servidor
 app.listen(port, () => {
