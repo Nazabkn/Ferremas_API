@@ -50,15 +50,18 @@ const obtenerInfoPaisCompleta = async (req, res) => {
     const client = await soap.createClientAsync(url);
     const [result] = await client.FullCountryInfoAsync({ sCountryISOCode: codigo });
 
+    const datos = result.FullCountryInfoResult;
+
     res.json({
-      pais: result.FullCountryInfoResult.sName,
-      capital: result.FullCountryInfoResult.sCapitalCity,
-      moneda: result.FullCountryInfoResult.sCurrency.sName,
-      idiomas: result.FullCountryInfoResult.Languages.tLanguage.map(lang => lang.sName),
-      regiones: [`Código Telefónico: ${result.FullCountryInfoResult.sPhoneCode}`]
+      codigo: codigo,
+      pais: datos.sName,
+      capital: datos.sCapitalCity,
+      moneda: datos.sCurrency?.sName || 'No disponible',
+      idiomas: datos.Languages?.tLanguage?.map(l => l.sName) || [],
+      telefono: datos.sPhoneCode
     });
   } catch (error) {
-    console.error('Error al obtener info completa del país:', error.message);
+    console.error('Error SOAP:', error.message);
     res.status(500).json({ error: 'No se pudo obtener la información del país' });
   }
 };
