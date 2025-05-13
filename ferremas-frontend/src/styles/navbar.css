@@ -1,0 +1,21 @@
+/* Estilos para el Navbar */
+.navbar-container {
+  margin-top: 10px;        /* Un poco de espacio entre el navbar y el header */
+}
+
+.navbar {
+  margin-bottom: 20px;     /* Un poco de espacio entre el navbar y el contenido principal */
+}
+
+.navbar-brand {
+  font-size: 24px;         /* Ajustar tamaño de la marca */
+}
+
+.navbar .nav-link {
+  font-size: 16px;         /* Ajustar tamaño de los enlaces del navbar */
+}
+
+/* Estilo del carrito en el navbar */
+.navbar .btn-outline-light {
+  font-size: 16px;         /* Tamaño de texto más pequeño en el botón */
+}

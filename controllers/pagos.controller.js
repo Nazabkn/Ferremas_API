@@ -3,7 +3,7 @@ const axios = require('axios');
 const iniciarPago = async (req, res) => {
   try {
     const body = {
-      buy_order: 'orden123',  // puedes generar uno dinámico
+      buy_order: 'orden123', 
       session_id: 'sesion456',
       amount: 10000,
       return_url: 'http://localhost:8000/webpay/retorno/'

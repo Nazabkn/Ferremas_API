@@ -6,7 +6,9 @@ const pagosRoutes = require('./routes/pagos.routes');
 const conversionRoutes = require('./routes/conversion.routes');
 const soapRoutes = require('./routes/soap.routes');
 const contactoRoutes = require('./routes/contacto.routes');
+const cors = require ('cors');
 
+app.use(cors());
 // Middlewares
 app.use(express.json());
 

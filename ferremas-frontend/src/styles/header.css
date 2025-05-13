@@ -1,0 +1,36 @@
+.navbar-brand {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 1px;
+}
+
+.nav-link {
+  margin-right: 15px;
+  transition: 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffc107 !important;
+  transform: scale(1.05);
+}
+
+.btn-outline-warning {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+
+body {
+  background-color: #f8f9fa;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+h2, h3, h5 {
+  color: #343a40;
+}
+
+.btn-warning {
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
