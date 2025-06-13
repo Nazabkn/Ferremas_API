@@ -7,10 +7,13 @@ const conversionRoutes = require('./routes/conversion.routes');
 const soapRoutes = require('./routes/soap.routes');
 const contactoRoutes = require('./routes/contacto.routes');
 const cors = require ('cors');
+const usuariosRoutes = require('./routes/usuarios.routes');
 
 app.use(cors());
 // Middlewares
 app.use(express.json());
+
+app.use('/api/usuarios', usuariosRoutes);
 
 // Importar rutas
 const productosRoutes = require('./routes/productos.routes');

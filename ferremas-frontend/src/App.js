@@ -8,6 +8,10 @@ import Contacto from './pages/contacto';
 import SimulacionCompra from './pages/simulacioncompra';
 import FinalizacionCompra from './pages/finalizacioncompra';
 import NotFound from './pages/notfound'; // página 404
+import Login from './pages/login';
+import Registro from './pages/registro';
+
+
 
 function App() {
   return (
@@ -21,6 +25,8 @@ function App() {
           <Route path="/simulacion-compra" element={<SimulacionCompra />} />
           <Route path="/finalizacion-compra" element={<FinalizacionCompra />} />
           <Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/registro" element={<Registro />} />
         </Routes>
       </Router>
     </CarritoProvider>

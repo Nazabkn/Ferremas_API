@@ -29,6 +29,18 @@ function Header() {
               <Nav.Link as={Link} to="/contacto" className="text-light">
                 Contacto
               </Nav.Link>
+              <Nav.Link as={Link} to="/registro" className="text-light">
+                Registro
+              </Nav.Link>
+              <Nav.Link as={Link} to="/login" className="text-light">
+                Login
+              </Nav.Link>
+              <Nav.Link as={Link} to="/simulacion-compra" className="text-light">
+                Simular Compra
+              </Nav.Link>
+              <Nav.Link as={Link} to="/finalizacion-compra" className="text-light">
+                Finalizar
+              </Nav.Link>
             </Nav>
             <Button variant="outline-warning" onClick={handleShowModal}>
               <FaShoppingCart size={18} />{' '}
@@ -37,8 +49,6 @@ function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-
-      {}
       <CarritoModal onClose={handleCloseModal} show={showModal} />
     </>
   );
