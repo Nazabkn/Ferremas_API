@@ -17,7 +17,7 @@ function Registro() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:3000/api/usuarios/registro', form);
+      await axios.post(`${process.env.REACT_APP_BACKEND}/api/usuarios/registro`, form);
       setRegistrado(true);
       setForm({ nombre: '', correo: '', contrasena: '' });
     } catch (error) {

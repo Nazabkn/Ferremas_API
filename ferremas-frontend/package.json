@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@fontsource/roboto": "^5.2.5",
+    "@react-google-maps/api": "^2.20.6",
     "@react-spring/web": "^9.7.5",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",

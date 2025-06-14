@@ -1,55 +1,96 @@
-
 import React from 'react';
 import { useCarrito } from '../context/CarritoContext';
-import { Container, Row, Col, ListGroup, Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-const CarritoDetalle = () => {
-  const { carrito } = useCarrito();
-  const total = carrito.reduce((acc, item) => acc + item.precio, 0);
+function CarritoDetalle() {
+  const { carrito, eliminarDelCarrito } = useCarrito();
+
+  // Calcular el total del carrito con validación
+  const totalCarrito = carrito.reduce((acc, item) => {
+    const precio = Number(item.precio) || 0;
+    const cantidad = Number(item.cantidad) || 1;
+    return acc + (precio * cantidad);
+  }, 0);
+
+  // Función para pagar con Webpay
+  const pagarConWebpay = async () => {
+    // Validación extra
+    if (isNaN(totalCarrito) || totalCarrito <= 0) {
+      alert('El total del carrito no es válido.');
+      return;
+    }
+
+    console.log("Monto a pagar:", totalCarrito);
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/api/webpay/iniciar/',
+        { monto: totalCarrito },
+        {
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      const { url, token } = response.data;
+
+      // Crear formulario dinámico para redirigir a Webpay
+      const form = document.createElement('form');
+      form.method = 'POST';
+      form.action = url;
+
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = 'token_ws';
+      input.value = token;
+
+      form.appendChild(input);
+      document.body.appendChild(form);
+      form.submit();
+    } catch (error) {
+      console.error('Error al iniciar Webpay:', error);
+      alert('No se pudo procesar el pago.');
+    }
+  };
 
   return (
-    <Container fluid className="mt-5" style={{ backgroundColor: '#f8f9fa', minHeight: '100vh' }}>
-      <Row className="justify-content-center">
-        <Col md={8} className="bg-white p-4 rounded shadow-sm">
-          <h2 className="text-center text-warning mb-4">Detalle del Carrito</h2>
+    <div style={{ padding: '2rem' }}>
+      <h2>🛒 Carrito de Compras</h2>
 
-          {carrito.length === 0 ? (
-            <div className="text-center">
-              <p>No hay productos en tu carrito.</p>
-              <Link to="/" className="btn btn-warning text-dark mt-3">
-                Volver a la tienda
-              </Link>
-            </div>
-          ) : (
-            <div>
-              <ListGroup>
-                {carrito.map((producto, index) => (
-                  <ListGroup.Item key={index} className="d-flex justify-content-between align-items-center">
-                    <span>{producto.nombre}</span>
-                    <span>${producto.precio}</span>
-                  </ListGroup.Item>
-                ))}
-              </ListGroup>
+      {carrito.length === 0 ? (
+        <p>No hay productos en el carrito.</p>
+      ) : (
+        <div>
+          <ul>
+            {carrito.map((producto, index) => (
+              <li key={index}>
+                {producto.nombre} - ${producto.precio} x {producto.cantidad || 1}
+                <button onClick={() => eliminarDelCarrito(producto)} style={{ marginLeft: '1rem' }}>
+                  Eliminar
+                </button>
+              </li>
+            ))}
+          </ul>
 
-              <div className="d-flex justify-content-between mt-4">
-                <h4>Total:</h4>
-                <h4>${total}</h4>
-              </div>
+          <h3>Total: ${totalCarrito}</h3>
 
-              <div className="text-center mt-4">
-                <Link to="/simulacion-compra">
-                  <Button variant="warning" className="text-dark w-100">
-                    Comprar por webpay
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          )}
-        </Col>
-      </Row>
-    </Container>
+          <button
+            onClick={pagarConWebpay}
+            style={{
+              padding: '1rem',
+              background: '#198754',
+              color: '#fff',
+              border: 'none',
+              marginTop: '1rem'
+            }}
+          >
+            Pagar con Webpay 💳
+          </button>
+        </div>
+      )}
+    </div>
   );
-};
+}
 
 export default CarritoDetalle;

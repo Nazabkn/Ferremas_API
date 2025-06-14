@@ -10,11 +10,10 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:3000/api/usuarios/login', {
-        correo,
-        contrasena
-      });
+      const res = await axios.post(`${process.env.REACT_APP_BACKEND}/api/usuarios/login`, { correo, contrasena });
 
+
+      localStorage.setItem('usuario', JSON.stringify(res.data.usuario));
       setNombreUsuario(res.data.usuario.nombre);
       setLogueado(true);
       setCorreo('');

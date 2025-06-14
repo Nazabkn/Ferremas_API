@@ -10,6 +10,11 @@ import FinalizacionCompra from './pages/finalizacioncompra';
 import NotFound from './pages/notfound'; // página 404
 import Login from './pages/login';
 import Registro from './pages/registro';
+import Mapa from './pages/mapa';
+import FAQ from './pages/faq';
+import Perfil from './pages/perfil';
+
+
 
 
 
@@ -27,6 +32,9 @@ function App() {
           <Route path="*" element={<NotFound />} /> {/* Ruta 404 */}
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registro />} />
+          <Route path="/mapa" element={<Mapa />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </Router>
     </CarritoProvider>

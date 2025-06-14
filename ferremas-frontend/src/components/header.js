@@ -28,13 +28,23 @@ function Header() {
               </Nav.Link>
               <Nav.Link as={Link} to="/contacto" className="text-light">
                 Contacto
+              <Nav.Link as={Link} to="/mapa" className="text-light">
+                Mapa
+              </Nav.Link>
               </Nav.Link>
               <Nav.Link as={Link} to="/registro" className="text-light">
                 Registro
               </Nav.Link>
+              <Nav.Link as={Link} to="/faq" className="text-light">
+                FAQ
+              </Nav.Link>
               <Nav.Link as={Link} to="/login" className="text-light">
                 Login
               </Nav.Link>
+              <Nav.Link as={Link} to="/perfil" className="text-light">
+                Perfil
+              </Nav.Link>
+
               <Nav.Link as={Link} to="/simulacion-compra" className="text-light">
                 Simular Compra
               </Nav.Link>
